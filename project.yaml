@@ -21,7 +21,7 @@ network:
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 3082705 # The block when this contract was created
+    startBlock: 3246370 # The block when the first proposal in this fund was created
     mapping:
       file: "./dist/index.js"
       handlers:

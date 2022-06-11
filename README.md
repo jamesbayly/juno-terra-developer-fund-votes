@@ -37,7 +37,7 @@ query {
 	votes(
     first: 5
     orderBy: BLOCK_HEIGHT_DESC
-    filter: {proposalID: {equalTo: "4"}}
+    # filter: {proposalID: {equalTo: "4"}}
   ) {
     nodes {
       id
