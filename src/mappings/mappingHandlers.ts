@@ -1,44 +1,17 @@
-import { ExecuteEvent, Message, Transaction } from "../types";
-import {
-  CosmosEvent,
-  CosmosBlock,
-  CosmosMessage,
-  CosmosTransaction,
-} from "@subql/types-cosmos";
+import { Vote } from "../types";
+import { CosmosMessage } from "@subql/types-cosmos";
 
-export async function handleBlock(block: CosmosBlock): Promise<void> {
-  // If you wanted to index each block in Cosmos (Juno), you could do that here
-}
+export async function handleTerraDeveloperFund(
+  message: CosmosMessage
+): Promise<void> {
+  // logger.info(JSON.stringify(message));
+  // Example vote https://www.mintscan.io/juno/txs/EAA2CC113B3EC79AE5C280C04BE851B82414B108273F0D6464A379D7917600A4
 
-export async function handleTransaction(tx: CosmosTransaction): Promise<void> {
-  const transactionRecord = new Transaction(tx.hash);
-  transactionRecord.blockHeight = BigInt(tx.block.block.header.height);
-  transactionRecord.timestamp = tx.block.block.header.time;
-  await transactionRecord.save();
-}
+  const voteRecord = new Vote(`${message.tx.hash}-${message.idx}`);
+  voteRecord.blockHeight = BigInt(message.block.block.header.height);
+  voteRecord.voter = message.msg.sender;
+  voteRecord.proposalID = message.msg.msg.vote.proposal_id;
+  voteRecord.vote = message.msg.msg.vote.vote === "yes";
 
-export async function handleMessage(msg: CosmosMessage): Promise<void> {
-  const messageRecord = new Message(`${msg.tx.hash}-${msg.idx}`);
-  messageRecord.blockHeight = BigInt(msg.block.block.header.height);
-  messageRecord.txHash = msg.tx.hash;
-  messageRecord.sender = msg.msg.sender;
-  messageRecord.contract = msg.msg.contract;
-  await messageRecord.save();
-}
-
-export async function handleEvent(event: CosmosEvent): Promise<void> {
-  const eventRecord = new ExecuteEvent(
-    `${event.tx.hash}-${event.msg.idx}-${event.idx}`
-  );
-  eventRecord.blockHeight = BigInt(event.block.block.header.height);
-  eventRecord.txHash = event.tx.hash;
-  for (const attr of event.event.attributes) {
-    switch (attr.key) {
-      case "_contract_address":
-        eventRecord.contractAddress = attr.value;
-        break;
-      default:
-    }
-  }
-  await eventRecord.save();
+  await voteRecord.save();
 }

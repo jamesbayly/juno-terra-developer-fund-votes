@@ -1,25 +1,7 @@
-type Block @entity {
-  id: ID! # The block hash
-  height: BigInt!
-}
-
-type ExecuteEvent @entity {
-  id: ID!
+type Vote @entity {
+  id: ID! # id field is always required and must look like this
   blockHeight: BigInt!
-  txHash: String!
-  contractAddress: String!
-}
-
-type Transaction @entity {
-  id: ID!
-  blockHeight: BigInt!
-  timestamp: String!
-}
-
-type Message @entity {
-  id: ID!
-  blockHeight: BigInt!
-  txHash: String!
-  sender: String!
-  contract: String!
+  voter: String! # The address that voted
+  proposalID: BigInt! # The proposal ID
+  vote: Boolean! # If they voted to support or reject the proposal
 }

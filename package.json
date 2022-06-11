@@ -1,7 +1,7 @@
 {
-  "name": "cosmos-subquery-starter",
+  "name": "juno-terra-developer-fund-votes",
   "version": "0.0.1",
-  "description": "This project can be use as a starting point for developing your Cosmos (Juno) based SubQuery project",
+  "description": "This project indexes all votes made on the Terra Developer Fund",
   "main": "dist/index.js",
   "scripts": {
     "build": "subql build",
@@ -17,7 +17,7 @@
     "schema.graphql",
     "project.yaml"
   ],
-  "author": "SubQuery Team",
+  "author": "James Bayly",
   "license": "MIT",
   "devDependencies": {
     "@cosmjs/stargate": "0.28.4",

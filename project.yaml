@@ -1,5 +1,5 @@
 specVersion: 1.0.0
-name: juno-subql-starter
+name: juno-terra-developer-fund-votes
 version: 0.0.1
 runner:
   node:
@@ -9,7 +9,7 @@ runner:
     name: "@subql/query"
     version: "*"
 description: >-
-  This project can be use as a starting point for developing your Cosmos (Juno) based SubQuery project
+  This project indexes all votes made on the Terra Developer Fund
 repository: https://github.com/subquery/juno-subql-starter
 schema:
   file: ./schema.graphql
@@ -17,36 +17,19 @@ schema:
 network:
   chainId: juno-1
   endpoint: https://rpc.juno-1.api.onfinality.io
+  # dictionary: https://api.subquery.network/sq/subquery/cosmos-juno-dictionary
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 3062001
-    #chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
-    #  cosmos.slashing.v1beta1:
-    #    file: "./proto/cosmos/slashing/v1beta1/tx.proto"
-    #    messages:
-    #     - "MsgUnjail"
+    startBlock: 3082705 # The block when this contract was created
     mapping:
       file: "./dist/index.js"
       handlers:
-        - handler: handleBlock
-          kind: cosmos/BlockHandler
-        - handler: handleTransaction
-          kind: cosmos/TransactionHandler
-        - handler: handleEvent
-          kind: cosmos/EventHandler
-          filter:
-            type: execute
-            messageFilter:
-              type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-              # contractCall field can be specified here too
-              #values: # A set of key/value pairs that are present in the message data
-                #contract: "juno1v99ehkuetkpf0yxdry8ce92yeqaeaa7lyxr2aagkesrw67wcsn8qxpxay0"
-        - handler: handleMessage
+        - handler: handleTerraDeveloperFund
           kind: cosmos/MessageHandler
           filter:
             type: "/cosmwasm.wasm.v1.MsgExecuteContract"
-            # Filter to only messages with the provide_liquidity function call
-            #contractCall: "provide_liquidity" # The name of the contract function that was called
-            #values: # A set of key/value pairs that are present in the message data
-              #contract: "juno1v99ehkuetkpf0yxdry8ce92yeqaeaa7lyxr2aagkesrw67wcsn8qxpxay0"
+            # Filter to only messages with the vote function call
+            contractCall: "vote" # The name of the contract function that was called
+            values: # This is the specific smart contract that we are subscribing to
+              contract: "juno1lgnstas4ruflg0eta394y8epq67s4rzhg5anssz3rc5zwvjmmvcql6qps2"
