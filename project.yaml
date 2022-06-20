@@ -10,7 +10,7 @@ runner:
     version: "*"
 description: >-
   This project indexes all votes made on the Terra Developer Fund
-repository: https://github.com/subquery/juno-subql-starter
+repository: https://github.com/jamesbayly/juno-terra-developer-fund-votes
 schema:
   file: ./schema.graphql
 
