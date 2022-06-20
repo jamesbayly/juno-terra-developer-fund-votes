@@ -17,7 +17,7 @@ schema:
 network:
   chainId: juno-1
   endpoint: https://rpc.juno-1.api.onfinality.io
-  # dictionary: https://api.subquery.network/sq/subquery/cosmos-juno-dictionary
+  dictionary: https://api.subquery.network/sq/subquery/cosmos-juno-dictionary
 
 dataSources:
   - kind: cosmos/Runtime
