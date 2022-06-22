@@ -1,6 +1,8 @@
 # SubQuery Starter Project for Juno
 
-This is a starter project for Indexing Juno. It includes a simple blockhandler and an event handler. This project indexes all transfer events in juno-1.
+This project indexes all votes made on the Terra Developer Fund
+You can try out this project in the Explorer here
+[https://explorer.subquery.network/subquery/subquery/juno-terra-developer-fund-votes](https://explorer.subquery.network/subquery/subquery/juno-terra-developer-fund-votes)
 
 # Geting Started
 
