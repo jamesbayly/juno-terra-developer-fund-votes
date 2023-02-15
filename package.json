@@ -5,10 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "subql build",
-    "prepack": "rm -rf dist && npm build",
-    "test": "jest",
     "codegen": "subql codegen",
-    "start:docker": "docker-compose pull && docker-compose up --remove-orphans"
+    "start:docker": "docker-compose pull && docker-compose up --remove-orphans",
+    "dev": "subql codegen && subql build && docker-compose pull && docker-compose up --remove-orphans",
+    "prepack": "rm -rf dist && npm run build",
+    "test": "jest"
   },
   "homepage": "https://github.com/subquery/cosmos-subql-starter",
   "repository": "github:subquery/cosmos-subql-starter",
@@ -21,11 +22,11 @@
   "license": "MIT",
   "devDependencies": {
     "@cosmjs/stargate": "^0.28.9",
-    "@subql/cli": "^1.1.0",
+    "@subql/cli": "latest",
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@subql/types-cosmos": "^0.0.7-1",
+    "@subql/types-cosmos": "latest",
     "@types/node": "^17.0.21",
     "pino": "^7.8.0",
     "ts-proto": "^1.112.1",

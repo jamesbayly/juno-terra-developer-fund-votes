@@ -27,7 +27,8 @@ network:
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 3246370 # The block when the first proposal in this fund was created
+    # startBlock: 3246370 # The block when the first proposal in this fund was created
+    startBlock: 4136532 # Where Juno-4 was created, you'll need to find a juno-3 endpoint for previous data
     mapping:
       file: "./dist/index.js"
       handlers:
